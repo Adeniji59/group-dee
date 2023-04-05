@@ -1,0 +1,2 @@
+Age =int(input(“enter age”))
+  height =float(int(enter your height))
