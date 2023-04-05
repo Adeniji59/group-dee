@@ -1,2 +1,4 @@
-Age =int(input(“enter age”))
-  height =float(int(enter your height))
+  print("hello world"):
+  Age =int(input(“enter your age”))
+    height =float(int(enter your height))
+   if
