@@ -1,0 +1,21 @@
+// Define music collection
+const music = [
+	{
+		title: "Bohemian Rhapsody",
+		artist: "Queen",
+		genre: "Rock"
+	},
+	{
+		title: "Hey Jude",
+		artist: "The Beatles",
+		genre: "Rock"
+	},
+	{
+		title: "Thunderstruck",
+		artist: "AC/DC",
+		genre: "Rock"
+	},
+	{
+		title: "Shake It Off",
+		artist: "Taylor Swift",
+		genre

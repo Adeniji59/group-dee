@@ -1,0 +1,36 @@
+// Define movie collection
+const movies = [
+	{
+		title: "Die Hard",
+		genre: "Action"
+	},
+	{
+		title: "Terminator",
+		genre: "Action"
+	},
+	{
+		title: "John Wick",
+		genre: "Action"
+	},
+	{
+		title: "The Hangover",
+		genre: "Comedy"
+	},
+	{
+		title: "Bridesmaids",
+		genre: "Comedy"
+	},
+	{
+		title: "Superbad",
+		genre: "Comedy"
+	}
+];
+
+// Handle search form submission
+const form = document.querySelector('form');
+form.addEventListener('submit', function(event) {
+	event.preventDefault();
+	const query = event.target.querySelector('input').value;
+	const results = movies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase()));
+	console.log(results);
+});
