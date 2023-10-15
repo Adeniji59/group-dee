@@ -1,0 +1,84 @@
+import tkinter as tk
+
+class AccountManagementApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Account Management")
+
+        self.account_var = tk.StringVar(value="Savings")
+        self.transaction_var = tk.StringVar(value="Deposit")
+        self.savings_balance = tk.DoubleVar(value=0.0)
+        self.current_balance = tk.DoubleVar(value=0.0)
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        account_label = tk.Label(self, text="Account:")
+        account_label.pack()
+
+        account_radiobutton1 = tk.Radiobutton(self, text="Savings", variable=self.account_var, value="Savings")
+        account_radiobutton1.pack()
+
+        account_radiobutton2 = tk.Radiobutton(self, text="Current", variable=self.account_var, value="Current")
+        account_radiobutton2.pack()
+
+        transaction_label = tk.Label(self, text="Transaction:")
+        transaction_label.pack()
+
+        transaction_radiobutton1 = tk.Radiobutton(self, text="Deposit", variable=self.transaction_var, value="Deposit")
+        transaction_radiobutton1.pack()
+
+        transaction_radiobutton2 = tk.Radiobutton(self, text="Withdraw", variable=self.transaction_var, value="Withdraw")
+        transaction_radiobutton2.pack()
+
+        amount_label = tk.Label(self, text="Amount:")
+        amount_label.pack()
+
+        self.amount_entry = tk.Entry(self)
+        self.amount_entry.pack()
+
+        transaction_button = tk.Button(self, text="Perform Transaction", command=self.perform_transaction)
+        transaction_button.pack()
+
+        self.error_label = tk.Label(self, fg="red")
+        self.error_label.pack()
+
+        savings_balance_label = tk.Label(self, text="Savings Balance: $")
+        savings_balance_label.pack()
+
+        savings_balance_value = tk.Label(self, textvariable=self.savings_balance)
+        savings_balance_value.pack()
+
+        current_balance_label = tk.Label(self, text="Current Balance: $")
+        current_balance_label.pack()
+
+        current_balance_value = tk.Label(self, textvariable=self.current_balance)
+        current_balance_value.pack()
+
+    def perform_transaction(self):
+        account_type = self.account_var.get()
+        transaction_type = self.transaction_var.get()
+        amount = float(self.amount_entry.get())
+
+        if account_type == "Savings" and transaction_type == "Deposit":
+            self.savings_balance.set(self.savings_balance.get() + amount)
+        elif account_type == "Savings" and transaction_type == "Withdraw":
+            current_balance = self.savings_balance.get()
+            if current_balance >= amount:
+                self.savings_balance.set(current_balance - amount)
+            else:
+                self.error_label.config(text="Insufficient balance!")
+        elif account_type == "Current" and transaction_type == "Deposit":
+            self.current_balance.set(self.current_balance.get() + amount)
+        elif account_type == "Current" and transaction_type == "Withdraw":
+            current_balance = self.current_balance.get()
+            if current_balance >= amount:
+                self.current_balance.set(current_balance - amount)
+            else:
+                self.error_label.config(text="Insufficient balance!")
+
+        self.amount_entry.delete(0, tk.END)
+
+if __name__ == "__main__":
+    app = AccountManagementApp()
+    app.mainloop()
